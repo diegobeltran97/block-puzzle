@@ -24,14 +24,35 @@ public class Proyecto2 implements ActionListener
       int c = 240, d = 280;
 	  JFrame ventana;
       JButton btn_boton, btn_tmp, btn_iniciar,btn_boton2,btn_shufle,btn_comprobar;
+
       JLabel lbl_x, lbl_y;
       JTextField tf_x, tf_y;
+      JButton[] btn_2boton;
+      int dirx = 0;
+      btn_tmp = (JButton)e.getSource();
+
       int distanciax, distanciay;
       int[]nums = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14};
       int []nums2 = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14};
+
+
       //shuffle
 
       b bob = new b();
+
+       Timer timer = new Timer(500, new ActionListener()
+   		{
+      	  public void actionPerformed(ActionEvent e)
+      	{
+
+            int x;
+            x = btn_.getLocation().x;
+            btn_temp[.setLocation( x + dirx, 40);
+
+      	 }
+   });
+
+
 
     public void shuffle()
     {
@@ -48,18 +69,20 @@ public class Proyecto2 implements ActionListener
 
     }
 
-    public void crear()
+
+
+       public void crear()
    {
 
       int a;
       //System.out.println("crear");
-      for ( int i = 0  ; i < nums.length ; i++)
+      for ( int i = 0  ; i < 15 ; i++)
       {
          a = i + 1;
-         btn_boton = new JButton(Integer.toString(a));
-         btn_boton.setBounds(60+ 60 *( nums[i] % 4), 70+70*( nums[i] / 4),60,70);
-         btn_boton.addActionListener(this);
-         ventana.add(btn_boton);
+         btn_2boton[i] = new JButton(Integer.toString(a));
+         btn_2boton[i].setBounds(60+ 60 *( i % 4), 70+70*( i / 4),60,70);
+         btn_2boton[i].addActionListener(this);
+         ventana.add(btn_2boton[i]);
 
 
       }
@@ -86,6 +109,7 @@ public class Proyecto2 implements ActionListener
    Proyecto2()
    {
 
+	  btn_2boton = new JButton[15];
 
       ventana = new JFrame("botones");
       ventana.setBounds(100,100,500,500);
@@ -124,13 +148,15 @@ public class Proyecto2 implements ActionListener
 
       if (e.getSource() == btn_iniciar)
       {
-         shuffle();
+
          crear();
+
       }
       else
       {
+      	 timer.start();
          int x1, y1,o;
-         btn_tmp = (JButton)e.getSource();
+
          x1 = btn_tmp.getLocation().x;
          y1 = btn_tmp.getLocation().y;
 
@@ -149,8 +175,9 @@ public class Proyecto2 implements ActionListener
         if ( distanciay  == 0  & distanciax == 60)  {
         	System.out.println("moverse en x" );
 
-        	System.out.println(distanciax);
-        	moverx( x1, y1, distanciax);
+        	dirx++;
+
+
 
 	     	}
 
@@ -160,14 +187,8 @@ public class Proyecto2 implements ActionListener
 
    	}
 
-     void moverx ( int x1, int y1, int distanciax) {
+     void moverx ( int x1) {
 
-             int temp = x1;
-             x1 = bob.x;
-             bob.x = temp;
-
-	         btn_tmp.setLocation(x1  , y1);
-	         btn_boton2.setLocation(bob.x  , bob.y);
 
 
 
