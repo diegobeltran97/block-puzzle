@@ -29,18 +29,17 @@ public class Proyecto2 implements ActionListener
       JTextField tf_x, tf_y;
       JButton[] btn_2boton;
       int dirx = 0;
-      btn_tmp = (JButton)e.getSource();
+      int[]nums = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14};
 
       int distanciax, distanciay;
-      int[]nums = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14};
-      int []nums2 = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14};
+
 
 
       //shuffle
 
       b bob = new b();
 
-       Timer timer = new Timer(500, new ActionListener()
+      /*Timer timer = new Timer(500, new ActionListener()
    		{
       	  public void actionPerformed(ActionEvent e)
       	{
@@ -50,24 +49,12 @@ public class Proyecto2 implements ActionListener
             btn_temp[.setLocation( x + dirx, 40);
 
       	 }
-   });
+      });
+      */
 
 
 
-    public void shuffle()
-    {
 
-     int tmp,random;
-     for ( int i= 0; i < nums.length;i++)
-      {
-     	random =(int)(Math.random() * nums.length);
-     	random = Math.min(random, nums.length -1);
-     	tmp = nums[i];
-     	nums[i] = nums[random];
-     	nums[random] = tmp;
-      }
-
-    }
 
 
 
@@ -152,9 +139,16 @@ public class Proyecto2 implements ActionListener
          crear();
 
       }
+       if (e.getSource() == btn_shufle)
+      {
+
+         shuffle();
+
+      }
       else
       {
-      	 timer.start();
+      	 //timer.start();
+      	 btn_tmp = (JButton)e.getSource();
          int x1, y1,o;
 
          x1 = btn_tmp.getLocation().x;
@@ -174,8 +168,9 @@ public class Proyecto2 implements ActionListener
         }
         if ( distanciay  == 0  & distanciax == 60)  {
         	System.out.println("moverse en x" );
+        	moverx( x1, y1, distanciax);
 
-        	dirx++;
+        	//dirx++;
 
 
 
@@ -185,10 +180,19 @@ public class Proyecto2 implements ActionListener
 
       	}
 
+
+
+
    	}
 
-     void moverx ( int x1) {
+     void moverx ( int x1, int y1, int distancia) {
 
+       int temp = x1;
+       x1 = bob.x;
+       bob.x = temp;
+
+	    btn_tmp.setLocation(x1  , y1);
+	  btn_boton2.setLocation(bob.x  , bob.y);
 
 
 
@@ -207,6 +211,46 @@ public class Proyecto2 implements ActionListener
 
 
    };
+
+      void shuffle()
+    {
+
+     int tmp,random;
+     int tmp2;
+     int x2;
+     int y2;
+     int x3,y3;
+
+      //System.out.println("shuffle");
+
+      for ( int i = 0; i < 14; i++)
+      {
+
+
+         x2 = btn_2boton[i].getLocation().x;
+         x3 = btn_2boton[6].getLocation().x;
+         tmp = x2;
+         x2 = x3;
+         x3 = tmp;
+
+         y2 = btn_2boton[i].getLocation().y;
+         y3 = btn_2boton[6].getLocation().y;
+         tmp2 = y2;
+         y2 = y3;
+         y3 = tmp2;
+
+         btn_2boton[i].setLocation(x2  , y2);
+         btn_2boton[6].setLocation(x3  , y3);
+
+      }
+
+      }
+
+
+
+
+
+
 
 
 }
