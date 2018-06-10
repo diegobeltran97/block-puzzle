@@ -52,8 +52,20 @@ public class Proyecto2 implements ActionListener
       });
       */
 
+    void shuffle1()
+    {
+    	int tmp;
+    	int random;
+    	for ( int i = 0; i < nums.length; i ++ )
+    	{
 
-
+    	 random =(int)(Math.random() * nums.length);
+     	random = Math.min(random, nums.length -1);
+     	tmp = nums[i];
+     	nums[i] = nums[random];
+     	nums[random] = tmp;
+       }
+    }
 
 
 
@@ -114,6 +126,11 @@ public class Proyecto2 implements ActionListener
       btn_shufle.addActionListener(this);
       ventana.add(btn_shufle);
 
+      btn_comprobar = new JButton("Verificar");
+      btn_comprobar.setBounds(300,120,120,20);
+      btn_comprobar.addActionListener(this);
+      ventana.add(btn_comprobar);
+
       tf_x = new JTextField();
       tf_x.setBounds(320,205,30,20);
       ventana.add(tf_x);
@@ -143,6 +160,13 @@ public class Proyecto2 implements ActionListener
       {
 
          shuffle();
+
+      }
+
+       if (e.getSource() == btn_comprobar)
+      {
+
+         verificar();
 
       }
       else
@@ -221,28 +245,55 @@ public class Proyecto2 implements ActionListener
      int y2;
      int x3,y3;
 
-      //System.out.println("shuffle");
 
-      for ( int i = 0; i < 14; i++)
+
+
+      //System.out.println("shuffle");
+      shuffle1();
+      for ( int i = 0; i < nums.length; i++)
       {
 
 
          x2 = btn_2boton[i].getLocation().x;
-         x3 = btn_2boton[6].getLocation().x;
+         x3 = btn_2boton[nums[i]].getLocation().x;
          tmp = x2;
          x2 = x3;
          x3 = tmp;
 
          y2 = btn_2boton[i].getLocation().y;
-         y3 = btn_2boton[6].getLocation().y;
+         y3 = btn_2boton[nums[i]].getLocation().y;
          tmp2 = y2;
          y2 = y3;
          y3 = tmp2;
 
          btn_2boton[i].setLocation(x2  , y2);
-         btn_2boton[6].setLocation(x3  , y3);
+         btn_2boton[nums[i]].setLocation(x3  , y3);
 
       }
+
+      }
+
+      void verificar()
+      {
+      		int acum = 0;
+      	 for ( int i = 0  ; i < 15 ; i++)
+       {
+      	int x;
+      	int a = 60+ 60 *( i % 4);
+
+      	 x = btn_2boton[i].getLocation().x;
+
+      	if ( a == x )
+      	{
+      		acum++;
+      	}
+      	else
+      	{
+      		acum = 0;
+      	}
+
+       }
+       System.out.println(acum);
 
       }
 
