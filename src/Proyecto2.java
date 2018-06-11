@@ -23,8 +23,9 @@ public class Proyecto2 implements ActionListener
 	{
       int c = 240, d = 280;
 	  JFrame ventana;
-      JButton btn_boton, btn_tmp, btn_iniciar,btn_boton2,btn_shufle,btn_comprobar;
-
+      JButton btn_boton, btn_iniciar,btn_boton2,btn_shufle,btn_comprobar;
+      JButton btn_tmp;
+      private JButton btn_tmp2;
       JLabel lbl_x, lbl_y;
       JTextField tf_x, tf_y;
       JButton[] btn_2boton;
@@ -43,14 +44,16 @@ public class Proyecto2 implements ActionListener
    		{
       	  public void actionPerformed(ActionEvent e)
       	{
+      	   btn_tmp2 = (JButton)e.getSource();
+           int x,y;
 
-            int x;
-            x = btn_.getLocation().x;
-            btn_temp[.setLocation( x + dirx, 40);
+            x = btn_tmp2.getLocation().x;
+            y = btn_tmp2.getLocation().y;
+            btn_tmp2.setLocation( x + 80, y);
 
       	 }
-      });
-      */
+      });*/
+
 
     void shuffle1()
     {
@@ -131,14 +134,7 @@ public class Proyecto2 implements ActionListener
       btn_comprobar.addActionListener(this);
       ventana.add(btn_comprobar);
 
-      tf_x = new JTextField();
-      tf_x.setBounds(320,205,30,20);
-      ventana.add(tf_x);
 
-
-      tf_y = new JTextField();
-      tf_y.setBounds(320,230,30,20);
-      ventana.add(tf_y);
 
 
 
@@ -155,11 +151,14 @@ public class Proyecto2 implements ActionListener
 
          crear();
 
+        // timer.start();
+
       }
        if (e.getSource() == btn_shufle)
       {
 
          shuffle();
+
 
       }
 
@@ -167,19 +166,20 @@ public class Proyecto2 implements ActionListener
       {
 
          verificar();
+         //dirx++;
 
       }
       else
       {
       	 //timer.start();
       	 btn_tmp = (JButton)e.getSource();
+
          int x1, y1,o;
 
          x1 = btn_tmp.getLocation().x;
          y1 = btn_tmp.getLocation().y;
 
-         tf_x.setText(String.valueOf(x1));
-         tf_y.setText(String.valueOf(y1));
+
 
          distanciax = Math.abs(bob.x - x1);
          distanciay = Math.abs(bob.y - y1);
@@ -293,7 +293,14 @@ public class Proyecto2 implements ActionListener
       	}
 
        }
-       System.out.println(acum);
+       if ( acum == 15)
+       {
+       	 JOptionPane.showMessageDialog(null, "Felicidades" );
+       } else
+       {
+       	JOptionPane.showMessageDialog(null, "No esta ordenada" );
+       }
+
 
       }
 
