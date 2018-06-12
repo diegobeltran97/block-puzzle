@@ -34,8 +34,6 @@ public class Proyecto2 implements ActionListener
 
       int distanciax, distanciay;
 
-
-
       //shuffle
 
       b bob = new b();
@@ -54,53 +52,6 @@ public class Proyecto2 implements ActionListener
       	 }
       });*/
 
-
-    void shuffle1()
-    {
-    	int tmp;
-    	int random;
-    	for ( int i = 0; i < nums.length; i ++ )
-    	{
-
-    	 random =(int)(Math.random() * nums.length);
-     	random = Math.min(random, nums.length -1);
-     	tmp = nums[i];
-     	nums[i] = nums[random];
-     	nums[random] = tmp;
-       }
-    }
-
-
-
-
-       public void crear()
-   {
-
-      int a;
-      //System.out.println("crear");
-      for ( int i = 0  ; i < 15 ; i++)
-      {
-         a = i + 1;
-         btn_2boton[i] = new JButton(Integer.toString(a));
-         btn_2boton[i].setBounds(60+ 60 *( i % 4), 70+70*( i / 4),60,70);
-         btn_2boton[i].addActionListener(this);
-         ventana.add(btn_2boton[i]);
-
-
-      }
-
-        btn_boton2 = new JButton();
-        btn_boton2.setBounds(240 , 280, 60,70);
-        btn_boton2.setBackground(Color.lightGray);
-        btn_boton2.addActionListener(this);
-        ventana.add(btn_boton2);
-        bob.getx(c);
-        bob.gety(d);
-        ventana.repaint();
-
-
-
-   }
 
 
    public static void main(String[] args)
@@ -209,6 +160,52 @@ public class Proyecto2 implements ActionListener
 
    	}
 
+
+    void shuffle1()
+    {
+    	int tmp;
+    	int random;
+    	for ( int i = 0; i < nums.length; i ++ )
+    	{
+
+    	 random =(int)(Math.random() * nums.length);
+     	random = Math.min(random, nums.length -1);
+     	tmp = nums[i];
+     	nums[i] = nums[random];
+     	nums[random] = tmp;
+       }
+    }
+
+
+       public void crear()
+   {
+
+      int a;
+      //System.out.println("crear");
+      for ( int i = 0  ; i < 15 ; i++)
+      {
+         a = i + 1;
+         btn_2boton[i] = new JButton(Integer.toString(a));
+         btn_2boton[i].setBounds(60+ 60 *( i % 4), 70+70*( i / 4),60,70);
+         btn_2boton[i].addActionListener(this);
+         ventana.add(btn_2boton[i]);
+
+
+      }
+
+        btn_boton2 = new JButton();
+        btn_boton2.setBounds(240 , 280, 60,70);
+        btn_boton2.setBackground(Color.lightGray);
+        btn_boton2.addActionListener(this);
+        ventana.add(btn_boton2);
+        bob.getx(c);
+        bob.gety(d);
+        ventana.repaint();
+
+
+
+   }
+
      void moverx ( int x1, int y1, int distancia) {
 
        int temp = x1;
@@ -275,8 +272,8 @@ public class Proyecto2 implements ActionListener
 
       void verificar()
       {
-      		int acum = 0;
-      	 for ( int i = 0  ; i < 15 ; i++)
+      	int acum = 0;
+      	for ( int i = 0  ; i < 15 ; i++)
        {
       	int x;
       	int a = 60+ 60 *( i % 4);
