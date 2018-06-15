@@ -29,6 +29,8 @@ public class Proyecto2 implements ActionListener
       JLabel lbl_x, lbl_y;
       JTextField tf_x, tf_y;
       JButton[] btn_2boton;
+
+      int dir;
       int dirx = 0;
       int[]nums = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14};
 
@@ -38,16 +40,17 @@ public class Proyecto2 implements ActionListener
 
       b bob = new b();
 
-      /*Timer timer = new Timer(500, new ActionListener()
+     /* Timer timer = new Timer(500, new ActionListener()
    		{
       	  public void actionPerformed(ActionEvent e)
       	{
-      	   btn_tmp2 = (JButton)e.getSource();
+
            int x,y;
 
-            x = btn_tmp2.getLocation().x;
-            y = btn_tmp2.getLocation().y;
-            btn_tmp2.setLocation( x + 80, y);
+            x = btn_2boton[dir].getLocation().x;
+            y = btn_2boton[dir].getLocation().y;
+            btn_2boton[dir].setLocation( x + dirx , y);
+            timer.stop();
 
       	 }
       });*/
@@ -95,6 +98,7 @@ public class Proyecto2 implements ActionListener
 
    public void actionPerformed(ActionEvent e)
    {
+
       // System.out.println("actionPerformed");
 
       if (e.getSource() == btn_iniciar)
@@ -117,12 +121,21 @@ public class Proyecto2 implements ActionListener
       {
 
          verificar();
-         //dirx++;
+
 
       }
       else
       {
-      	 //timer.start();
+      /*	 timer.start();
+       if ( e.getSource() != btn_iniciar &&  e.getSource() != btn_shufle )
+       {
+       	 dir = Integer.parseInt(e.getActionCommand()) - 1;
+       	  System.out.println(dir);
+       }*/
+
+
+
+
       	 btn_tmp = (JButton)e.getSource();
 
          int x1, y1,o;
@@ -143,7 +156,7 @@ public class Proyecto2 implements ActionListener
         }
         if ( distanciay  == 0  & distanciax == 60)  {
         	System.out.println("moverse en x" );
-        	moverx( x1, y1, distanciax);
+        	moverx( x1, y1 );
 
         	//dirx++;
 
@@ -157,25 +170,7 @@ public class Proyecto2 implements ActionListener
 
 
 
-
    	}
-
-
-    void shuffle1()
-    {
-    	int tmp;
-    	int random;
-    	for ( int i = 0; i < nums.length; i ++ )
-    	{
-
-    	 random =(int)(Math.random() * nums.length);
-     	random = Math.min(random, nums.length -1);
-     	tmp = nums[i];
-     	nums[i] = nums[random];
-     	nums[random] = tmp;
-       }
-    }
-
 
        public void crear()
    {
@@ -206,15 +201,13 @@ public class Proyecto2 implements ActionListener
 
    }
 
-     void moverx ( int x1, int y1, int distancia) {
+     void moverx ( int x1, int y1) {
 
-       int temp = x1;
-       x1 = bob.x;
-       bob.x = temp;
+       bob.x = x1;
+       bob.y = y1;
 
-	    btn_tmp.setLocation(x1  , y1);
 	  btn_boton2.setLocation(bob.x  , bob.y);
-
+      dir++;
 
 
    };
@@ -232,6 +225,21 @@ public class Proyecto2 implements ActionListener
 
 
    };
+
+       void shuffle1()
+    {
+    	int tmp;
+    	int random;
+    	for ( int i = 0; i < nums.length; i ++ )
+    	{
+
+    	 random =(int)(Math.random() * nums.length);
+     	random = Math.min(random, nums.length -1);
+     	tmp = nums[i];
+     	nums[i] = nums[random];
+     	nums[random] = tmp;
+       }
+    }
 
       void shuffle()
     {
