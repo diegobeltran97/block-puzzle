@@ -25,35 +25,43 @@ public class Proyecto2 implements ActionListener
 	  JFrame ventana;
       JButton btn_boton, btn_iniciar,btn_boton2,btn_shufle,btn_comprobar;
       JButton btn_tmp;
-      private JButton btn_tmp2;
+      JButton btn_tmp2;
       JLabel lbl_x, lbl_y;
       JTextField tf_x, tf_y;
       JButton[] btn_2boton;
-
-      int dir;
-      int dirx = 0;
+      int referencia;
+      int selection;
+      int dirx;
       int[]nums = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14};
 
       int distanciax, distanciay;
 
       //shuffle
+      int dir;
 
       b bob = new b();
 
-     /* Timer timer = new Timer(500, new ActionListener()
+      Timer timer = new Timer(200, new ActionListener()
    		{
       	  public void actionPerformed(ActionEvent e)
       	{
-
-           int x,y;
-
-            x = btn_2boton[dir].getLocation().x;
-            y = btn_2boton[dir].getLocation().y;
-            btn_2boton[dir].setLocation( x + dirx , y);
-            timer.stop();
+           int x,y,r, d;
+            x = btn_2boton[selection].getLocation().x;
+            y = btn_2boton[selection].getLocation().y;
+            r =  btn_boton2.getWidth();
+            
+            
+            btn_2boton[selection].setLocation(x + dir, y);
+            if ( x + dir == referencia + 60 )
+            {
+            	timer.stop();
+            }
+           
+            
+            
 
       	 }
-      });*/
+      });
 
 
 
@@ -64,7 +72,7 @@ public class Proyecto2 implements ActionListener
 
    Proyecto2()
    {
-
+	   dir = 0;
 	  btn_2boton = new JButton[15];
 
       ventana = new JFrame("botones");
@@ -90,11 +98,42 @@ public class Proyecto2 implements ActionListener
 
 
 
-
+      
 
       ventana.setVisible(true);
 
    }
+   
+   	   public void crear()
+{
+
+   int a;
+   //System.out.println("crear");
+   for ( int i = 0  ; i < 15 ; i++)
+   {
+      a = i + 1;
+      btn_2boton[i] = new JButton(Integer.toString(a));
+      btn_2boton[i].setBounds(60+ 60 *( i % 4), 70+70*( i / 4),60,70);
+      btn_2boton[i].addActionListener(this);
+      ventana.add(btn_2boton[i]);
+
+
+   }
+
+     btn_boton2 = new JButton();
+     btn_boton2.setBounds(240 , 280, 60,70);
+     btn_boton2.setBackground(Color.lightGray);
+     btn_boton2.addActionListener(this);
+     ventana.add(btn_boton2);
+     bob.getx(c);
+     bob.gety(d);
+     ventana.repaint();
+     
+   
+   
+
+
+}
 
    public void actionPerformed(ActionEvent e)
    {
@@ -105,6 +144,7 @@ public class Proyecto2 implements ActionListener
       {
 
          crear();
+     	
 
         // timer.start();
 
@@ -126,17 +166,20 @@ public class Proyecto2 implements ActionListener
       }
       else
       {
-      /*	 timer.start();
+     
        if ( e.getSource() != btn_iniciar &&  e.getSource() != btn_shufle )
        {
-       	 dir = Integer.parseInt(e.getActionCommand()) - 1;
-       	  System.out.println(dir);
-       }*/
+    	   timer.start();
+    	 
+       	 selection = Integer.parseInt(e.getActionCommand()) - 1;
+       	
+       }
 
 
 
 
       	 btn_tmp = (JButton)e.getSource();
+      	 
 
          int x1, y1,o;
 
@@ -150,21 +193,31 @@ public class Proyecto2 implements ActionListener
 
 
         if ( distanciax  == 0 & distanciay == 70 )  {
-        	System.out.println("moverse en y");
+        	 
+        	//System.out.println("moverse en y");
+        	
         	movery( x1, y1, distanciax);
+        	
+        	
+        	
 
         }
         if ( distanciay  == 0  & distanciax == 60)  {
+        	 dir++; 
+        	referencia = btn_2boton[selection].getLocation().x ;
+        	System.out.println(referencia);
         	System.out.println("moverse en x" );
+        	
+        	//System.out.println(distanciax );
         	moverx( x1, y1 );
 
-        	//dirx++;
+        	
 
 
 
 	     	}
 
-	     	System.out.println(x1);
+	
 
       	}
 
@@ -172,42 +225,14 @@ public class Proyecto2 implements ActionListener
 
    	}
 
-       public void crear()
-   {
-
-      int a;
-      //System.out.println("crear");
-      for ( int i = 0  ; i < 15 ; i++)
-      {
-         a = i + 1;
-         btn_2boton[i] = new JButton(Integer.toString(a));
-         btn_2boton[i].setBounds(60+ 60 *( i % 4), 70+70*( i / 4),60,70);
-         btn_2boton[i].addActionListener(this);
-         ventana.add(btn_2boton[i]);
-
-
-      }
-
-        btn_boton2 = new JButton();
-        btn_boton2.setBounds(240 , 280, 60,70);
-        btn_boton2.setBackground(Color.lightGray);
-        btn_boton2.addActionListener(this);
-        ventana.add(btn_boton2);
-        bob.getx(c);
-        bob.gety(d);
-        ventana.repaint();
-
-
-
-   }
+ 
 
      void moverx ( int x1, int y1) {
+        
+         bob.x = x1;
+         btn_boton2.setLocation(bob.x  , bob.y);
 
-       bob.x = x1;
-       bob.y = y1;
-
-	  btn_boton2.setLocation(bob.x  , bob.y);
-      dir++;
+        
 
 
    };
